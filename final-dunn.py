@@ -20,8 +20,8 @@ summation = 0
 
 limit_a = input("What is the lower limit a?: ")
 limit_b = input("What is the upper limit b?: ")
-partition_num = input("How many partitions for the calculation to use?: ")
-print ("The limit a is {} The limit b is {} the number of partitions are {}".format(limit_a, limit_b, partition_num))
+partition_num = input("How many partitions N for the Riemann sum to use?: ")
+#print ("The limit a is {} The limit b is {} the number of partitions are {}".format(limit_a, limit_b, partition_num))
 #check for valid data
 assert isinstance(partition_num, int)
 assert limit_b > limit_a
@@ -29,17 +29,23 @@ assert limit_b > limit_a
 summation = 0
 delta = float(limit_b - limit_a)/float(partition_num)
 step = int(delta)
+#Find the Riemann sum using left endpoints
 for index in range(0, partition_num, 1):
     summation += float(delta * expevaluate(limit_a + (delta * index) ) )
-print("Left Summation x = {}, f(n) = {}, summation={:2.10f}".format(limit_a + (delta * index),expevaluate(limit_a + (delta * index) ),summation))
+#print("Left Summation x = {}, f(n) = {}, summation={:2.10f}".format(limit_a + (delta * index),expevaluate(limit_a + (delta * index) ),summation))
+print("using left-endpoints : {:2.10f}".format(summation))
 
-summation = 0
+#find the Riemann sum using right endpoints
+summation = 0 # reset value
 for index in range(1, partition_num+1, 1):
     summation += float(delta * expevaluate(limit_a + (delta * index) ) )
-print("Right Summation x = {}, f(n)= {}, summation={:2.10f}".format(limit_a + (delta * index),expevaluate(limit_a + (delta * index) ) ,summation))
+#print("Right Summation x = {}, f(n)= {}, summation={:2.10f}".format(limit_a + (delta * index),expevaluate(limit_a + (delta * index) ) ,summation))
+print("using right-endpoints : {:2.10f}".format(summation))
 
-summation = 0
+#find the Riemann sum using midpoint values
+summation = 0 #reset value
 for index in range(0, partition_num, 1):
     summation += float(delta * expevaluate(limit_a + delta * (index+0.5)))
-print("Midpoint Summation x = {}, f(n) = {}, summation={:2.10f}".format(limit_a + delta * (index+ 0.5),expevaluate(limit_a + delta * (index+0.5)), summation))
+#print("Midpoint Summation x = {}, f(n) = {}, summation={:2.10f}".format(limit_a + delta * (index+ 0.5),expevaluate(limit_a + delta * (index+0.5)), summation))
+print("using midpoints : {:2.10f}".format(summation))
 
